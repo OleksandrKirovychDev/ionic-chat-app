@@ -3,10 +3,17 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
-import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { getApp, initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { provideAuth, getAuth, connectAuthEmulator } from '@angular/fire/auth';
+import {
+  provideFirestore,
+  getFirestore,
+  connectFirestoreEmulator,
+  Firestore,
+  initializeFirestore,
+} from '@angular/fire/firestore';
+
 import { environment } from '../environments/environment';
-import { provideAuth, getAuth } from '@angular/fire/auth';
-import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-root',
@@ -24,14 +31,33 @@ export class AppComponent {
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore()),
+    provideFirestore(() => {
+      let firestore: Firestore;
+      if (environment.useEmulators) {
+        // Long polling required for Cypress
+        firestore = initializeFirestore(getApp(), {
+          experimentalForceLongPolling: true,
+        });
+        connectFirestoreEmulator(firestore, 'localhost', 8080);
+      } else {
+        firestore = getFirestore();
+      }
+      return firestore;
+    }),
+    provideAuth(() => {
+      const auth = getAuth();
+      if (environment.useEmulators) {
+        connectAuthEmulator(auth, 'http://localhost:9099', {
+          disableWarnings: true,
+        });
+      }
+      return auth;
+    }),
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

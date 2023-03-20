@@ -7,5 +7,6 @@ export const environment = {
     authDomain: 'ionic-chat-13010.firebaseapp.com',
     messagingSenderId: '369542892327',
   },
-  production: true
+  production: true,
+  useEmulators: false,
 };
