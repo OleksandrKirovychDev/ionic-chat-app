@@ -7,7 +7,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('./home/home.component').then((m) => m.HOME_ROUTES),
   },
-
   {
     path: '',
     pathMatch: 'full',
