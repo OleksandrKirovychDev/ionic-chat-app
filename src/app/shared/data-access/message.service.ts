@@ -24,13 +24,13 @@ export class MessageService {
     ) as Observable<IMessage[]>;
   }
 
-  public addMessaged(message: string) {
+  public addMessage(message: string) {
     const newMessage: IMessage = {
       author: 'test@gmail.com',
       content: message,
       created: Date.now().toString(),
     };
-    const msgCollection = collection(this.firestore, 'message');
+    const msgCollection = collection(this.firestore, 'messages');
     addDoc(msgCollection, newMessage);
   }
 }
