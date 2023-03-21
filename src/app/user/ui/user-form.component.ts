@@ -16,7 +16,7 @@ import { TUserStatus } from '../types/user-status.type';
   standalone: true,
   imports: [CommonModule, IonicModule, ReactiveFormsModule],
   template: `
-    <form [formGroup]="userForm">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
       <ion-item lines="none">
         <ion-icon color="light" slot="start" name="mail-outline"></ion-icon>
         <ion-input
@@ -77,13 +77,13 @@ export class UserFromComponent {
 
   public userForm = this.fb.nonNullable.group({
     email: ['', [Validators.email, Validators.required]],
-    password: ['', Validators.minLength(8), Validators.required],
+    password: ['', [Validators.minLength(8), Validators.required]],
     confirmPassword: ['', [Validators.required]],
   });
 
   constructor(private fb: FormBuilder) {}
 
-  public onSubmit() {
+  protected onSubmit() {
     if (this.userForm.valid) {
       const { confirmPassword, ...credentials } = this.userForm.getRawValue();
       this.user.emit(credentials);

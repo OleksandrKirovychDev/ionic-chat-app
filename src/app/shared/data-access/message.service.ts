@@ -6,12 +6,14 @@ import {
   limit,
 } from '@angular/fire/firestore';
 import { collection, orderBy, query } from '@firebase/firestore';
-import { map, Observable } from 'rxjs';
+import { map, Observable, take } from 'rxjs';
+
 import { IMessage } from '../interfaces/message.interface';
+import { AuthService } from './auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class MessageService {
-  constructor(private firestore: Firestore) {}
+  constructor(private firestore: Firestore, private authService: AuthService) {}
 
   public getMessages() {
     const messages = query(
@@ -25,12 +27,17 @@ export class MessageService {
   }
 
   public addMessage(message: string) {
-    const newMessage: IMessage = {
-      author: 'test@gmail.com',
-      content: message,
-      created: Date.now().toString(),
-    };
-    const msgCollection = collection(this.firestore, 'messages');
-    addDoc(msgCollection, newMessage);
+    this.authService.auth$.pipe(take(1)).subscribe((user) => {
+      if (user?.email) {
+        const newMessage: IMessage = {
+          author: user.email,
+          content: message,
+          created: Date.now().toString(),
+        };
+
+        const messagesCollection = collection(this.firestore, 'messages');
+        addDoc(messagesCollection, newMessage);
+      }
+    });
   }
 }

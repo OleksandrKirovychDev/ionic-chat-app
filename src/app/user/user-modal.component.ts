@@ -26,7 +26,7 @@ import { UserFromComponent } from './ui/user-form.component';
     <ion-content>
       <app-user-form
         *ngIf="userStatus$ | async as status"
-        (user)="createAcoount($event)"
+        (user)="createAccount($event)"
         [userStatus]="status"
       >
       </app-user-form>
@@ -58,7 +58,7 @@ export class UserModalComponent {
     private navCtrl: NavController
   ) {}
 
-  public async createAcoount(credentials: ICredentials) {
+  protected async createAccount(credentials: ICredentials) {
     this.userStatus$.next('creating');
     try {
       await this.authService.createAccount(credentials);
