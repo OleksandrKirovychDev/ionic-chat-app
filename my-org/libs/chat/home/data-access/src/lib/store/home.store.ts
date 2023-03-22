@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { switchMap } from 'rxjs';
-import { MessageService } from 'src/app/shared/data-access/message.service';
-import { IMessage } from 'src/app/shared/interfaces/message.interface';
+
+import { MessageService } from '@my-org/chat/shared/data-access';
+import { IMessage } from '@my-org/chat/shared/interfaces';
 
 export interface HomeState {
   messages: IMessage[];

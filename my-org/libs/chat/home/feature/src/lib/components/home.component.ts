@@ -3,10 +3,11 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Routes } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { combineLatest, map } from 'rxjs';
-import { MessageService } from '../shared/data-access/message.service';
-import { HomeStore } from './data-access/home.store';
-import { MessageInputComponent } from './ui/message-input.component';
-import { MessageListComponent } from './ui/message-list.component';
+
+import { MessageService } from '@my-org/chat/shared/data-access';
+import { HomeStore } from '@my-org/chat/home/data-access';
+import { MessageInputComponent } from '@my-org/chat/home/ui';
+import { MessageListComponent } from '@my-org/chat/home/ui';
 
 @Component({
   standalone: true,

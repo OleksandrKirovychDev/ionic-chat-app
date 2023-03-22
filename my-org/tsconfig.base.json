@@ -14,7 +14,19 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@my-org/chat/home/data-access": [
+        "libs/chat/home/data-access/src/index.ts"
+      ],
+      "@my-org/chat/home/feature": ["libs/chat/home/feature/src/index.ts"],
+      "@my-org/chat/home/ui": ["libs/chat/home/ui/src/index.ts"],
+      "@my-org/chat/shared/data-access": [
+        "libs/chat/shared/data-access/src/index.ts"
+      ],
+      "@my-org/chat/shared/interfaces": [
+        "libs/chat/shared/interfaces/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

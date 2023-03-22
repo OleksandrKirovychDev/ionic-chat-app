@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 
-import { IMessage } from '../../shared/interfaces/message.interface';
+import { IMessage } from '@my-org/chat/shared/interfaces';
 
 @Component({
   standalone: true,
@@ -11,14 +11,7 @@ import { IMessage } from '../../shared/interfaces/message.interface';
   template: `
     <ion-list lines="none">
       <ion-item *ngFor="let message of messages; trackBy: trackByFn">
-        <ion-avatar class="animate-in-primary">
-          <!-- <img
-            *ngIf="message.author"
-            src="https://avatars.dicebear.com/api/bottts/{{
-              message.author.split('@')[0]
-            }}.svg"
-          /> -->
-        </ion-avatar>
+        <ion-avatar class="animate-in-primary"></ion-avatar>
         <div class="chat-message animate-in-secondary">
           <ion-note>{{ message.author }}</ion-note>
           <p>{{ message.content }}</p>
