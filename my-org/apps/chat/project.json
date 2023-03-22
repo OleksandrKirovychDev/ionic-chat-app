@@ -15,8 +15,22 @@
         "polyfills": ["zone.js"],
         "tsConfig": "apps/chat/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/chat/src/favicon.ico", "apps/chat/src/assets"],
-        "styles": ["apps/chat/src/styles.scss"],
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "apps/chat/src/assets",
+            "output": "assets"
+          },
+          {
+            "glob": "**/*.svg",
+            "input": "../../node_modules/ionicons/dist/ionicons/svg",
+            "output": "./svg"
+          }
+        ],
+        "styles": [
+          "apps/chat/src/theme/variables.scss",
+          "apps/chat/src/global.scss"
+        ],
         "scripts": []
       },
       "configurations": {
