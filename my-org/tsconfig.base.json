@@ -1,0 +1,45 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@my-org/chat/core/guards": ["libs/chat/core/guards/src/index.ts"],
+      "@my-org/chat/core/validators": [
+        "libs/chat/core/validators/src/index.ts"
+      ],
+      "@my-org/chat/home/data-access": [
+        "libs/chat/home/data-access/src/index.ts"
+      ],
+      "@my-org/chat/home/feature": ["libs/chat/home/feature/src/index.ts"],
+      "@my-org/chat/home/ui": ["libs/chat/home/ui/src/index.ts"],
+      "@my-org/chat/login/data-access": [
+        "libs/chat/login/data-access/src/index.ts"
+      ],
+      "@my-org/chat/login/feature": ["libs/chat/login/feature/src/index.ts"],
+      "@my-org/chat/login/ui": ["libs/chat/login/ui/src/index.ts"],
+      "@my-org/chat/login/utils": ["libs/chat/login/utils/src/index.ts"],
+      "@my-org/chat/shared/data-access": [
+        "libs/chat/shared/data-access/src/index.ts"
+      ],
+      "@my-org/chat/shared/interfaces": [
+        "libs/chat/shared/interfaces/src/index.ts"
+      ],
+      "@my-org/chat/user/feature": ["libs/chat/user/feature/src/index.ts"],
+      "@my-org/chat/user/ui": ["libs/chat/user/ui/src/index.ts"],
+      "@my-org/chat/user/utils": ["libs/chat/user/utils/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

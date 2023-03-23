@@ -1,0 +1,83 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import '~@ionic/angular/css/core.css';
+
+/* Basic CSS for apps built with Ionic */
+@import '~@ionic/angular/css/normalize.css';
+@import '~@ionic/angular/css/structure.css';
+@import '~@ionic/angular/css/typography.css';
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import '~@ionic/angular/css/padding.css';
+@import '~@ionic/angular/css/float-elements.css';
+@import '~@ionic/angular/css/text-alignment.css';
+@import '~@ionic/angular/css/text-transformation.css';
+@import '~@ionic/angular/css/flex-utils.css';
+
+ion-header ion-toolbar {
+  box-shadow: 0px -7px 11px 0px var(--ion-color-dark);
+}
+
+form {
+  ion-item {
+    --background: transparent;
+  }
+
+  ion-badge {
+    padding: 1rem;
+  }
+
+  ion-input {
+    --background: var(--ion-color-primary-tint) !important;
+    --padding-start: 1rem !important;
+    --padding-top: 1rem !important;
+    --padding-bottom: 1rem !important;
+    --padding-end: 1rem !important;
+    margin: 0.5rem 0 !important;
+  }
+}
+
+@keyframes animateInPrimary {
+  0% {
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes animateInSecondary {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.animate-in-primary {
+  animation: animateInPrimary;
+  animation-duration: 750ms;
+}
+
+.animate-in-secondary {
+  animation: animateInSecondary ease-in 1;
+  animation-duration: 750ms;
+}
