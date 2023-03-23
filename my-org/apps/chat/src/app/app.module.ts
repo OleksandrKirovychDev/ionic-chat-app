@@ -1,16 +1,33 @@
-import { NgModule } from '@angular/core';
+import { ChangeDetectionStrategy, NgModule } from '@angular/core';
 import { provideFirebaseApp, initializeApp, getApp } from '@angular/fire/app';
 import { provideAuth, getAuth, connectAuthEmulator } from '@angular/fire/auth';
-import { provideFirestore, Firestore, initializeFirestore, connectFirestoreEmulator, getFirestore } from '@angular/fire/firestore';
+import {
+  provideFirestore,
+  Firestore,
+  initializeFirestore,
+  connectFirestoreEmulator,
+  getFirestore,
+} from '@angular/fire/firestore';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy, RouterModule } from '@angular/router';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { Component } from '@angular/core';
 
 import { HomeComponent } from '@my-org/chat/home/feature';
 
-import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
 import { environment } from '../environments/environment.prod';
+
+@Component({
+  selector: 'my-org-root',
+  template: `
+    <ion-app>
+      <ion-router-outlet></ion-router-outlet>
+    </ion-app>
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class AppComponent {}
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +35,6 @@ import { environment } from '../environments/environment.prod';
     BrowserModule,
     RouterModule.forRoot(appRoutes, { initialNavigation: 'enabledBlocking' }),
     IonicModule.forRoot(),
-    
     HomeComponent,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => {

@@ -6,4 +6,9 @@ export const appRoutes: Route[] = [
     loadChildren: () =>
       import('@my-org/chat/home/feature').then((m) => m.HOME_ROUTES),
   },
+  {
+    path: 'login',
+    loadChildren: () =>
+      import('@my-org/chat/login/feature').then((m) => m.LOGIN_ROUTES),
+  },
 ];
