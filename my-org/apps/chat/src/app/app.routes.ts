@@ -1,8 +1,10 @@
 import { Route } from '@angular/router';
+import { LoginGuard } from '@my-org/chat/core/guards';
 
 export const appRoutes: Route[] = [
   {
     path: 'home',
+    canActivate: [LoginGuard],
     loadChildren: () =>
       import('@my-org/chat/home/feature').then((m) => m.HOME_ROUTES),
   },

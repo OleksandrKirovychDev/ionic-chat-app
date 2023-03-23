@@ -9,7 +9,7 @@ import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 @Component({
-  selector: 'app-message-input',
+  selector: 'my-org-message-input',
   standalone: true,
   imports: [CommonModule, IonicModule, ReactiveFormsModule],
   template: `

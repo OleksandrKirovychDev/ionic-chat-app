@@ -11,13 +11,14 @@ import { IonicModule } from '@ionic/angular';
 
 import { ICredentials } from '@my-org/chat/shared/interfaces';
 import { TUserStatus } from '@my-org/chat/user/utils';
+import { passwordMatchesValidator } from '@my-org/chat/core/validators';
 
 @Component({
   selector: 'my-org-user-form',
   standalone: true,
   imports: [CommonModule, IonicModule, ReactiveFormsModule],
   template: `
-    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()" #form="ngForm">
       <ion-item lines="none">
         <ion-icon color="light" slot="start" name="mail-outline"></ion-icon>
         <ion-input
@@ -26,6 +27,15 @@ import { TUserStatus } from '@my-org/chat/user/utils';
           placeholder="email"
         ></ion-input>
       </ion-item>
+      <ion-note
+        color="danger"
+        *ngIf="
+          (userForm.controls.email.dirty || form.submitted) &&
+          !userForm.controls.email.valid
+        "
+      >
+        Please provide a valid email
+      </ion-note>
       <ion-item lines="none">
         <ion-icon
           color="light"
@@ -38,6 +48,15 @@ import { TUserStatus } from '@my-org/chat/user/utils';
           placeholder="password"
         ></ion-input>
       </ion-item>
+      <ion-note
+        color="danger"
+        *ngIf="
+          (userForm.controls.password.dirty || form.submitted) &&
+          !userForm.controls.password.valid
+        "
+      >
+        Password must be at least 8 characters long
+      </ion-note>
       <ion-item lines="none">
         <ion-icon
           color="light"
@@ -50,7 +69,26 @@ import { TUserStatus } from '@my-org/chat/user/utils';
           placeholder="confirm password"
         ></ion-input>
       </ion-item>
-      <ion-button type="submit" expand="full">Submit</ion-button>
+      <ion-note
+        color="danger"
+        *ngIf="
+          (userForm.controls.confirmPassword.dirty || form.submitted) &&
+          userForm.hasError('passwordMatch')
+        "
+      >
+        Must match password field
+      </ion-note>
+      <ion-note color="danger" *ngIf="userStatus === 'error'">
+        Could not create account with those details.
+      </ion-note>
+      <ion-button
+        type="submit"
+        expand="full"
+        [disabled]="userStatus === 'creating'"
+      >
+        <ion-spinner *ngIf="userStatus === 'creating'"></ion-spinner>
+        Submit
+      </ion-button>
     </form>
   `,
   styles: [
@@ -76,11 +114,17 @@ export class UserFromComponent {
 
   @Output() user = new EventEmitter<ICredentials>();
 
-  public userForm = this.fb.nonNullable.group({
-    email: ['', [Validators.email, Validators.required]],
-    password: ['', [Validators.minLength(8), Validators.required]],
-    confirmPassword: ['', [Validators.required]],
-  });
+  public userForm = this.fb.nonNullable.group(
+    {
+      email: ['', [Validators.email, Validators.required]],
+      password: ['', [Validators.minLength(8), Validators.required]],
+      confirmPassword: ['', [Validators.required]],
+    },
+    {
+      updateOn: 'blur',
+      validators: [passwordMatchesValidator],
+    }
+  );
 
   constructor(private fb: FormBuilder) {}
 

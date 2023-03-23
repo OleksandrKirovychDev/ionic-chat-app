@@ -38,7 +38,18 @@ import { ICredentials } from '@my-org/chat/shared/interfaces';
           placeholder="password"
         ></ion-input>
       </ion-item>
-      <ion-button type="submit" color="tertiary" expand="full">
+
+      <ion-badge *ngIf="loginStatus === 'error'" color="danger">
+        Could not log you in with those details.
+      </ion-badge>
+
+      <ion-button
+        type="submit"
+        color="tertiary"
+        expand="full"
+        [disabled]="loginStatus === 'authenticating'"
+      >
+        <ion-spinner *ngIf="loginStatus === 'authenticating'"></ion-spinner>
         Login
       </ion-button>
     </form>
