@@ -11,4 +11,9 @@ export const appRoutes: Route[] = [
     loadChildren: () =>
       import('@my-org/chat/login/feature').then((m) => m.LOGIN_ROUTES),
   },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'login',
+  },
 ];

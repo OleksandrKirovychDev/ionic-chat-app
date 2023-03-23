@@ -17,7 +17,6 @@ import { LoginFormComponent } from '@my-org/chat/login/ui';
     <ng-container *ngIf="vm$ | async as vm">
       <ion-content>
         <div class="container">
-          <img src="./assets/images/logo.png" />
           <my-org-login-form
             (login)="store.login($event)"
             [loginStatus]="vm.status"
